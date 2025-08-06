@@ -1,27 +1,27 @@
 import React from 'react'
 import { Typography, Space, Layout } from 'antd'
-import { NavBar, Exchange, Cryptocurrencies, CryptoDetails, News, HomePage} from './components'
+import { NavBar, Exchanges, Cryptocurrencies, CryptoDetails, News, HomePage} from './components'
 import { Route, Routes, Link } from 'react-router-dom'
 
 const App = () => {
   return (
     <div className="app">
-      <header className="nav">
+      <header className="navbar">
         <NavBar />
       </header>
-      <div className="main">
+      <main className="main">
         <Layout>
           <div className="routes">
             <Routes>
               <Route path='/' element={<HomePage />}  />
-              <Route path='/exchange' element={<Exchange />}  />
+              <Route path='/exchange' element={<Exchanges />}  />
               <Route path='/cryptocurrencies' element={<Cryptocurrencies />}  />
               <Route path='/crypto/:coinId' element={<CryptoDetails />}  />
               <Route path='/news' element={<News />}  />
             </Routes>
           </div>
         </Layout>
-      <div className="footer">
+      <footer className="footer">
         <Typography.Title level={5} style={{color: "white", textAlign: "center"}}>
           CryptoVerse <br />
           All rights Reserved
@@ -31,8 +31,8 @@ const App = () => {
           <Link to={"/exchange"}>Exchange</Link>
           <Link to={"/news"}>News</Link>
         </Space>
-      </div>
-      </div> 
+      </footer>
+      </main> 
     </div>
   )
 }
