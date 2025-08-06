@@ -1,7 +1,7 @@
 import React from 'react'
 import { Typography, Space, Layout } from 'antd'
 import { NavBar, Exchange, Cryptocurrencies, CryptoDetails, News, HomePage} from './components'
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, Link } from 'react-router-dom'
 
 const App = () => {
   return (
@@ -9,7 +9,7 @@ const App = () => {
       <header className="nav">
         <NavBar />
       </header>
-      <main className="main">
+      <div className="main">
         <Layout>
           <div className="routes">
             <Routes>
@@ -21,10 +21,18 @@ const App = () => {
             </Routes>
           </div>
         </Layout>
-      </main>
-      <footer className="footer">
-
-      </footer>
+      <div className="footer">
+        <Typography.Title level={5} style={{color: "white", textAlign: "center"}}>
+          CryptoVerse <br />
+          All rights Reserved
+        </Typography.Title>
+        <Space>
+          <Link to={"/"}>Home</Link>
+          <Link to={"/exchange"}>Exchange</Link>
+          <Link to={"/news"}>News</Link>
+        </Space>
+      </div>
+      </div> 
     </div>
   )
 }
