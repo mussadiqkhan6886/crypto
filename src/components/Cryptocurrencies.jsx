@@ -3,6 +3,7 @@ import millify from 'millify'
 import { Link } from 'react-router-dom'
 import { Row, Card, Col, Input } from 'antd'
 import { useGetCryptoQuery } from '../services/cryptoApi'
+import Loader from './Loader'
 
 const Cryptocurrencies = ({simplified}) => {
   const count = simplified ? 10 : 100
@@ -19,8 +20,7 @@ const Cryptocurrencies = ({simplified}) => {
   }, [cryptosList, searchInput])
 
 
-  if(isFetching) return "Loading..."
-  console.log(cryptos)
+  if(isFetching) return <Loader />
 
   return (
     <>
@@ -29,7 +29,7 @@ const Cryptocurrencies = ({simplified}) => {
         <Input placeholder='Search Cryptocurrency' onChange={e => setSearchInput(e.target.value)} />
       </div>
     )}
-      <Row gutter={[32,32]} className='crypto-card-container'>
+      <Row gutter={[28,28]} className='crypto-card-container'>
         {cryptos?.map(currency => (
           <Col xs={24} sm={12} lg={6} className='crypto-card' key={currency.uuid}>
             <Link to={`/crypto/${currency.uuid}`}>

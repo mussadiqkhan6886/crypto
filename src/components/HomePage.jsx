@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom'
 import {Cryptocurrencies, News} from "../components"
 
 import { useGetCryptoQuery } from '../services/cryptoApi'
+import Loader from './Loader'
 
 const {Title} = Typography
 
@@ -13,7 +14,7 @@ const HomePage = () => {
   const {data, isFetching} = useGetCryptoQuery(10)
   const globalState = data?.data?.stats
 
-  if(isFetching) return 'Loading...'
+  if(isFetching) return <Loader />
 
   return (
     <>
@@ -40,7 +41,7 @@ const HomePage = () => {
         <Link to={"/news"}>Show more</Link>
       </Title>
      </div>
-     {/* <News simplified /> */}
+     <News simplified />
     </>
   )
 }
