@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom'
 import { Row, Card, Col, Input } from 'antd'
 import { useGetCryptoQuery } from '../services/cryptoApi'
 import Loader from './Loader'
+import SparkLine from './SparkLine'
 
 const Cryptocurrencies = ({simplified}) => {
   const count = simplified ? 10 : 100
@@ -19,8 +20,9 @@ const Cryptocurrencies = ({simplified}) => {
 
   }, [cryptosList, searchInput])
 
-
+  console.log(cryptos)
   if(isFetching) return <Loader />
+
 
   return (
     <>
@@ -29,18 +31,23 @@ const Cryptocurrencies = ({simplified}) => {
         <Input placeholder='Search Cryptocurrency' onChange={e => setSearchInput(e.target.value)} />
       </div>
     )}
-      <Row gutter={[28,28]} className='crypto-card-container'>
+      <Row gutter={[10,10]} className='crypto-card-container'>
         {cryptos?.map(currency => (
-          <Col xs={24} sm={12} lg={6} className='crypto-card' key={currency.uuid}>
+          <Col xs={24} sm={12} md={12} lg={12} xl={8} className='crypto-card' key={currency.uuid}>
             <Link to={`/crypto/${currency.uuid}`}>
               <Card 
                 title={`${currency.rank}. ${currency.name}`}
                 extra={<img className='crypto-image' src={currency.iconUrl} />} 
                 hoverable
-              >
+              > 
+              <div style={{flex: "2"}} className="card-details-graph">
                 <p>Price: {millify(currency.price)}</p>
                 <p>Market Cap: {millify(currency.marketCap)}</p>
                 <p>Daily Change: {millify(currency.change)}%</p>
+              </div>
+              <div>
+             <SparkLine data={currency.sparkline} change={millify(currency.change)} />
+              </div>
               </Card>
             </Link>
           </Col>
