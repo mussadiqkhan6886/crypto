@@ -24,7 +24,10 @@ const CryptoDetails = () => {
   const stats = [
     { title: 'Price to USD', value: `$ ${cryptoDetails?.price && millify(cryptoDetails?.price)}`, icon: <DollarCircleOutlined /> },
     { title: 'Rank', value: cryptoDetails?.rank, icon: <NumberOutlined /> },
-    { title: '24h Volume', value: `$ ${cryptoDetails?.volume && millify(cryptoDetails?.volume)}`, icon: <ThunderboltOutlined /> },
+    { title: '24h Volume', value: cryptoDetails?.["24hVolume"]
+    ? `$ ${millify(cryptoDetails["24hVolume"])}`
+    : 'N/A', icon: <ThunderboltOutlined />
+    },
     { title: 'Market Cap', value: `$ ${cryptoDetails?.marketCap && millify(cryptoDetails?.marketCap)}`, icon: <DollarCircleOutlined /> },
     { title: 'All-time-high(daily avg.)', value: `$ ${cryptoDetails?.allTimeHigh?.price && millify(cryptoDetails?.allTimeHigh?.price)}`, icon: <TrophyOutlined /> },
   ];
@@ -40,11 +43,13 @@ const CryptoDetails = () => {
 
   if(isFetching) return "Loading...."
 
+  console.log(cryptoDetails)
+
   return (
     <Col className='coin-detail-container'>
       <Col className='coin-heading-container'>
         <Title level={2} className='coin-name'>
-          {cryptoDetails.name} ({cryptoDetails.slug}) Price
+          {cryptoDetails.name} ({cryptoDetails.symbol}) Price
         </Title>
         <p>
           {cryptoDetails.name} live price in US dollar View Value statistics, market cap and supply
@@ -95,13 +100,21 @@ const CryptoDetails = () => {
         </Col>
       </Col>
       <Col className="coin-desc-link">
-          <Row className="coin-desc">
+          {cryptoDetails.description ? (
+            <Row className="coin-desc">
             <Title level={3} className='coin-details-heading'>
-              What is {cryptoDetails.name}?
+              What is {cryptoDetails.name}
               <br />
               {HTMLReactParser(cryptoDetails.description)}
             </Title>
           </Row>
+          ) : (
+            <Row className="coin-desc">
+            <Title level={3} className='coin-details-heading'>
+              No Description
+            </Title>
+          </Row>
+          )}
           <Col className="coin-links">
             <Title level={3} className='coin-details-heading'>
               {cryptoDetails.name} Links
