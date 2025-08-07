@@ -14,18 +14,6 @@ const LineChart = ({coinHistory, currentPrice, coinName}) => {
         coinTimestamp.push(new Date(coinHistory.data.history[i].timestamp).toLocaleDateString())
     }
 
-    const options = {
-        scales: {
-            yAxes: [
-                {
-                    ticks: {
-                        beginAtZero: true
-                    }
-                }
-            ]
-        }
-    }
-
     const data = {
         labels: coinTimestamp,
         datasets: [
@@ -38,6 +26,19 @@ const LineChart = ({coinHistory, currentPrice, coinName}) => {
             }
         ]
     }
+
+     const options = {
+        scales: {
+            yAxes: [
+                {
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }
+            ]
+        }
+    }
+
 
   return (
     <>

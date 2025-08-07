@@ -11,7 +11,6 @@ const {Title} = Typography
 const HomePage = () => {
 
   const {data, isFetching} = useGetCryptoQuery(10)
-
   const globalState = data?.data?.stats
 
   if(isFetching) return 'Loading...'
@@ -41,7 +40,7 @@ const HomePage = () => {
         <Link to={"/news"}>Show more</Link>
       </Title>
      </div>
-     <News simplified />
+     {/* <News simplified /> */}
     </>
   )
 }
