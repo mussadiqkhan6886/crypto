@@ -386,3 +386,17 @@ width: 70%;
     padding: 20px;
     align-items: center;
 }
+.coinUrl{
+    color: black;
+}
+
+.coinUrl:hover{
+    text-decoration-line: underline;
+}
+
+.faq{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

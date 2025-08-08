@@ -1,6 +1,6 @@
 import React from 'react'
 import { Typography, Space, Layout } from 'antd'
-import { NavBar, Exchanges, Cryptocurrencies, CryptoDetails, News, HomePage} from './components'
+import { NavBar, CryptoFAQ, Cryptocurrencies, CryptoDetails, News, HomePage} from './components'
 import { Route, Routes, Link } from 'react-router-dom'
 
 const App = () => {
@@ -14,7 +14,7 @@ const App = () => {
           <div className="routes">
             <Routes>
               <Route path='/' element={<HomePage />}  />
-              <Route path='/exchange' element={<Exchanges />}  />
+              <Route path='/cryptofaq' element={<CryptoFAQ />}  />
               <Route path='/cryptocurrencies' element={<Cryptocurrencies />}  />
               <Route path='/crypto/:coinId' element={<CryptoDetails />}  />
               <Route path='/news' element={<News />}  />
@@ -28,7 +28,7 @@ const App = () => {
         </Typography.Title>
         <Space>
           <Link to={"/"}>Home</Link>
-          <Link to={"/exchange"}>Exchange</Link>
+          <Link to={"/cryptofaq"}>Crypto FAQ</Link>
           <Link to={"/news"}>News</Link>
         </Space>
       </footer>

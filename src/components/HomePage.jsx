@@ -16,7 +16,7 @@ const HomePage = () => {
 
   if(isFetching) return <Loader />
 
-  console.log(globalState)
+  console.log(data)
 
   return (
     <>

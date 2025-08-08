@@ -12,7 +12,7 @@ const { Text, Title } = Typography;
 const { Option } = Select;
 
 const News = ({ simplified }) => {
-  const [newsCategory, setNewsCategory] = useState('Bitcoin cash');
+  const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
   const { data } = useGetCryptoQuery(100);
 
   const { data: cryptoNews } = useGetCryptoNewsQuery({newsCategory, count: simplified ? 6 : 10});
@@ -32,7 +32,7 @@ const News = ({ simplified }) => {
             onChange={(value) => setNewsCategory(value)}
             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           >
-            <Option value="Cryptocurxency">Cryptocurrency</Option>
+            <Option value="Cryptocurrency">Cryptocurrency</Option>
             {data?.data?.coins?.map((currency) => <Option value={currency.name}>{currency.name}</Option>)}
           </Select>
         </Col>

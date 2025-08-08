@@ -33,13 +33,18 @@ const Cryptocurrencies = ({simplified}) => {
       <Row gutter={[10,10]} className='crypto-card-container'>
         {cryptos?.map(currency => (
           <Col xs={24} sm={12} md={12} lg={12} xl={8} className='crypto-card' key={currency.uuid}>
-            <Link to={`/crypto/${currency.uuid}`}>
+            
               <Card 
-                title={`${currency.rank}. ${currency.name}`}
+                title={
+                <span>
+                  {currency.rank}. <a className='coinUrl' href={currency.coinrankingUrl} target="_blank" rel="noreferrer">{currency.name}</a>
+                </span>
+              }
                 extra={<img className='crypto-image' src={currency.iconUrl} />} 
                 hoverable
               > 
-              <div style={{flex: "2"}} className="card-details-graph">
+              <Link to={`/crypto/${currency.uuid}`}>
+              <div style={{flex: "2", color: "black"}} className="card-details-graph">
                 <p>Price: {millify(currency.price)}</p>
                 <p>Market Cap: {millify(currency.marketCap)}</p>
                 <p>Daily Change: {millify(currency.change)}%</p>
@@ -47,8 +52,8 @@ const Cryptocurrencies = ({simplified}) => {
               <div>
              <SparkLine data={currency.sparkline} change={millify(currency.change)} />
               </div>
-              </Card>
             </Link>
+              </Card>
           </Col>
         ))}
       </Row> 
