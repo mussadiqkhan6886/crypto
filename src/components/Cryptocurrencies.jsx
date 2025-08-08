@@ -20,7 +20,6 @@ const Cryptocurrencies = ({simplified}) => {
 
   }, [cryptosList, searchInput])
 
-  console.log(cryptos)
   if(isFetching) return <Loader />
 
 

@@ -16,6 +16,8 @@ const HomePage = () => {
 
   if(isFetching) return <Loader />
 
+  console.log(globalState)
+
   return (
     <>
      <Title level={2} className='heading'>
@@ -27,6 +29,7 @@ const HomePage = () => {
       <Col span={12}><Statistic title="Total Market Cap" value={millify(globalState.totalMarketCap)} /></Col>
       <Col span={12}><Statistic title="Total 24h Volume" value={millify(Number(globalState.total24hVolume))} /></Col>
       <Col span={12}><Statistic title="Total Markets" value={millify(globalState.totalMarkets)} /></Col>
+      <Col span={12}><Statistic title="Total Coins" value={millify(globalState.totalCoins)} /></Col>
      </Row>
      <div className='home-heading-container'>
       <Title level={2} className='home-title'>Top 10 Cryptocurrencies in the world</Title>
@@ -41,7 +44,7 @@ const HomePage = () => {
         <Link to={"/news"}>Show more</Link>
       </Title>
      </div>
-     {/* <News simplified /> */}
+     <News simplified />
     </>
   )
 }

@@ -12,14 +12,13 @@ const { Text, Title } = Typography;
 const { Option } = Select;
 
 const News = ({ simplified }) => {
-  const [newsCategory, setNewsCategory] = useState('Cryptocurrency');
+  const [newsCategory, setNewsCategory] = useState('Bitcoin cash');
   const { data } = useGetCryptoQuery(100);
 
-  const { data: cryptoNews } = useGetCryptoNewsQuery({ newsCategory, count: simplified ? 6 : 12 });
+  const { data: cryptoNews } = useGetCryptoNewsQuery({newsCategory, count: simplified ? 6 : 10});
 
-  console.log(cryptoNews)
 
-  if (!cryptoNews?.value) return <Loader />;
+  if (!cryptoNews?.results) return <Loader />;
 
   return (
     <Row gutter={[24, 24]}>
@@ -33,26 +32,26 @@ const News = ({ simplified }) => {
             onChange={(value) => setNewsCategory(value)}
             filterOption={(input, option) => option.children.toLowerCase().indexOf(input.toLowerCase()) >= 0}
           >
-            <Option value="Cryptocurency">Cryptocurrency</Option>
+            <Option value="Cryptocurxency">Cryptocurrency</Option>
             {data?.data?.coins?.map((currency) => <Option value={currency.name}>{currency.name}</Option>)}
           </Select>
         </Col>
       )}
-      {cryptoNews.value.map((news, i) => (
-        <Col xs={24} sm={12} lg={8} key={i}>
+      {cryptoNews.results.map((news, i) => (
+        <Col xs={24} lg={12} key={i}>
           <Card hoverable className="news-card">
-            <a href={news.url} target="_blank" rel="noreferrer">
+            <a href={news.link} target="_blank" rel="noreferrer">
               <div className="news-image-container">
-                <Title className="news-title" level={4}>{news.name}</Title>
-                <img src={news?.image?.thumbnail?.contentUrl || demoImage} alt="" />
+                <Title className="news-title" level={4}>{news.title}</Title>
+                <img style={{maxWidth: "200px", maxHeight: "100px"}} src={news?.image_url || demoImage} alt="new image" />
               </div>
-              <p>{news.description.length > 100 ? `${news.description.substring(0, 100)}...` : news.description}</p>
+              <p>{news?.description?.length > 100 ? `${news.description.substring(0, 100)}...` : news.description}</p>
               <div className="provider-container">
                 <div>
-                  <Avatar src={news.provider[0]?.image?.thumbnail?.contentUrl || demoImage} alt="" />
-                  <Text className="provider-name">{news.provider[0]?.name}</Text>
+                  <Avatar src={news?.source_icon || demoImage} alt="new image icon" />
+                  <Text className="provider-name">{news.source_name}</Text>
                 </div>
-                <Text>{moment(news.datePublished).startOf('ss').fromNow()}</Text>
+                <Text>{moment(news.pubDate).startOf('ss').fromNow()}</Text>
               </div>
             </a>
           </Card>
